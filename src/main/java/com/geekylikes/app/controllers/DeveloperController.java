@@ -2,7 +2,6 @@ package com.geekylikes.app.controllers;
 
 import com.geekylikes.app.models.Developer;
 import com.geekylikes.app.repositories.DeveloperRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
