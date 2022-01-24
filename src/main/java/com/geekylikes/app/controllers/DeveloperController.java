@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/developers")
 public class DeveloperController {
@@ -54,5 +55,13 @@ public class DeveloperController {
     public ResponseEntity<String> destroyDeveloper (@PathVariable Long id) {
         repository.deleteById(id);
         return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/language")
+    public Developer addLanguage(@RequestBody Developer updates) {
+        Developer developer = repository.findById(updates.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        developer.getLanguages().addAll(updates.getLanguages());
+        return repository.save(developer);
     }
 }
