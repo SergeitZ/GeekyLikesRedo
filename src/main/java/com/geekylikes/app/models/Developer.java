@@ -1,5 +1,8 @@
 package com.geekylikes.app.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +19,7 @@ public class Developer {
 //    private String[] languages;
     @OneToMany
     @JoinColumn(name = "developer_id", referencedColumnName = "id")
+    @JsonIgnore
     private List<Geekout> geekouts;
 
     @ManyToMany
@@ -24,6 +28,7 @@ public class Developer {
             joinColumns = @JoinColumn(name = "developer_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id")
     )
+    @JsonIncludeProperties("name")
     public Set<Language> languages = new HashSet<>();
 
     public Developer() {}

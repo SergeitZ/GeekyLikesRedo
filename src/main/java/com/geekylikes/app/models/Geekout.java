@@ -1,5 +1,7 @@
 package com.geekylikes.app.models;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,6 +12,7 @@ public class Geekout {
 
     @ManyToOne
     @JoinColumn(name = "developer_id", referencedColumnName = "id")
+    @JsonIncludeProperties({"id", "name"})
     private Developer developer;
 
     private String title;
