@@ -38,4 +38,10 @@ public class LanguageController {
     public Language createOne (@RequestBody Language newLanguage) {
         return repository.save(newLanguage);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteLanguage (@PathVariable Long id) {
+        repository.deleteById(id);
+        return new ResponseEntity<>("Deleted", HttpStatus.OK);
+    }
 }
