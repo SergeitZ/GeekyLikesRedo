@@ -31,14 +31,18 @@ public class Developer {
     @JsonIncludeProperties("name")
     public Set<Language> languages = new HashSet<>();
 
+    @OneToOne
+    private Avatar avatar;
+
     public Developer() {}
 
-    public Developer(String name, String email, Integer cohort, List<Geekout> geekouts, Set<Language> languages) {
+    public Developer(String name, String email, Integer cohort, List<Geekout> geekouts, Set<Language> languages, Avatar avatar) {
         this.name = name;
         this.email = email;
         this.cohort = cohort;
         this.geekouts = geekouts;
         this.languages = languages;
+        this.avatar = avatar;
     }
 
     public long getId() {
@@ -87,5 +91,13 @@ public class Developer {
 
     public void setLanguages(Set<Language> languages) {
         this.languages = languages;
+    }
+
+    public Avatar getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Avatar avatar) {
+        this.avatar = avatar;
     }
 }
