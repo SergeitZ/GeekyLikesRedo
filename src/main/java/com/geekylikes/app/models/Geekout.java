@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonIncludeProperties;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Geekout {
@@ -15,6 +16,10 @@ public class Geekout {
     @JoinColumn(name = "developer_id", referencedColumnName = "id")
     @JsonIgnoreProperties({"languages", "email", "avatar"})
     private Developer developer;
+
+    @OneToMany(mappedBy = "geekout", fetch = FetchType.LAZY)
+    @JsonIncludeProperties("developer")
+    private Set<Approve> approvals;
 
     private String title;
     private String content;
@@ -58,5 +63,13 @@ public class Geekout {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Set<Approve> getApprovals() {
+        return approvals;
+    }
+
+    public void setApprovals(Set<Approve> approvals) {
+        this.approvals = approvals;
     }
 }
