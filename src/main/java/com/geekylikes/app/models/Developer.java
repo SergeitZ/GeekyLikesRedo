@@ -28,8 +28,14 @@ public class Developer {
             joinColumns = @JoinColumn(name = "developer_id"),
             inverseJoinColumns = @JoinColumn(name = "language_id")
     )
-  @JsonIgnoreProperties("developers")
+
+    @JsonIgnoreProperties("developers")
     public Set<Language> languages = new HashSet<>();
+
+    @OneToMany(mappedBy = "developer", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private Set<Approve> approvals;
+
 
     @OneToOne
     private Avatar avatar;
@@ -81,6 +87,15 @@ public class Developer {
 //    public void setGeekouts(List<Geekout> geekouts) {
 //        this.geekouts = geekouts;
 //    }
+
+
+    public Set<Approve> getApprovals() {
+        return approvals;
+    }
+
+    public void setApprovals(Set<Approve> approvals) {
+        this.approvals = approvals;
+    }
 
     public Set<Language> getLanguages() {
         return languages;
